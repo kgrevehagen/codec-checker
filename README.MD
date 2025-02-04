@@ -1,0 +1,1 @@
+Simple app that shows codec capabilities on your device.
