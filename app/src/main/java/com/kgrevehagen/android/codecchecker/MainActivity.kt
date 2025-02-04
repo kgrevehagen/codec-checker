@@ -1,26 +1,55 @@
 package com.kgrevehagen.android.codecchecker
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-
-        for (codecInfo in CodecHelper.getFlacDecodingCapabilities()) {
-            println("flac $codecInfo")
+        setContent {
+            DisplayCodecCapabilities()
         }
+    }
 
-        for (codecInfo in CodecHelper.getRawDecodingCapabilities()) {
-            println("raw $codecInfo")
+    @Composable
+    fun DisplayCodecCapabilities() {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .wrapContentSize(Alignment.Center)
+        ) {
+            for (codecInfo in CodecHelper.getFlacDecodingCapabilities()) {
+                CapabilitiesText("flac codec: $codecInfo")
+            }
+            for (codecInfo in CodecHelper.getRawDecodingCapabilities()) {
+                CapabilitiesText("raw codec: $codecInfo")
+            }
+            for (codecInfo in CodecHelper.getAC4DecodingCapabilities()) {
+                CapabilitiesText("ac4 codec: $codecInfo")
+            }
         }
+    }
 
-        for (codecInfo in CodecHelper.getAC4DecodingCapabilities()) {
-            println("ac4 $codecInfo")
-        }
-
+    @Composable
+    fun CapabilitiesText(text: String) {
+        Text(
+            modifier = Modifier.padding(16.dp, 8.dp),
+            text = text,
+            color = Color.LightGray,
+            fontSize = 22.sp,
+        )
     }
 }

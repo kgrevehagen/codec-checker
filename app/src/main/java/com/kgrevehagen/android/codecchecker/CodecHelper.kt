@@ -8,18 +8,6 @@ import androidx.media3.exoplayer.mediacodec.MediaCodecUtil
 @OptIn(UnstableApi::class)
 object CodecHelper {
 
-    fun hasAC4DecodingCapabilities() =
-        MediaCodecUtil.getDecoderInfos(MimeTypes.AUDIO_AC4, false, false)
-            .isNotEmpty()
-
-    fun hasFlacDecodingCapabilities() =
-        MediaCodecUtil.getDecoderInfos(MimeTypes.AUDIO_FLAC, false, false)
-            .isNotEmpty()
-
-    fun hasRawDecodingCapabilities() =
-        MediaCodecUtil.getDecoderInfos(MimeTypes.AUDIO_RAW, false, false)
-            .isNotEmpty()
-
     fun getAC4DecodingCapabilities() =
         MediaCodecUtil.getDecoderInfos(MimeTypes.AUDIO_AC4, false, false)
 
